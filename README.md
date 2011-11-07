@@ -17,6 +17,7 @@ Attributes
 * +x264[:install_method]+ - Installation method, `:source` or `:package` - default `:source`
 * +x264[:git_repository]+ - Location of the source Git repository if installing via `:source`
 * +x264[:git_revision]+ - Revision of the Git repository to install if installing via `:source`.
+* +x264[:prefix]+ - Location prefix of where the installation files will go if installing via `:source`
 
 WARN: When specifying the `git_revision` attribute, use the hash of commit or a HEAD - not a tag. Sync action of Git provider will always attempt to update the git clone if a tag is used.
 
