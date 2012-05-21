@@ -44,10 +44,23 @@ git "#{Chef::Config[:file_cache_path]}/x264" do
   notifies :run, "bash[compile_x264]"
 end
 
+# Write the flags used to compile the application to disk. If the flags
+# do not match those that are in the compiled_flags attribute - we recompile
+template "#{Chef::Config[:file_cache_path]}/x264-compiled_with_flags" do
+  source "compiled_with_flags.erb"
+  owner "root"
+  group "root"
+  mode 0600
+  variables(
+    :compile_flags => node[:x264][:compile_flags]
+  )
+  notifies :run, "bash[compile_x264]"
+end
+
 bash "compile_x264" do
   cwd "#{Chef::Config[:file_cache_path]}/x264"
   code <<-EOH
-    ./configure --prefix=#{node[:x264][:prefix]} --enable-static
+    ./configure --prefix=#{node[:x264][:prefix]} #{node[:x264][:compile_flags].join(' ')}
     make clean && make && make install
   EOH
   creates "#{node[:x264][:prefix]}/bin/x264"
