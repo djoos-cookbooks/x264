@@ -63,5 +63,5 @@ bash "compile_x264" do
     ./configure --prefix=#{node[:x264][:prefix]} #{node[:x264][:compile_flags].join(' ')}
     make clean && make && make install
   EOH
-  creates "#{node[:x264][:prefix]}/bin/x264"
+  action :nothing
 end
