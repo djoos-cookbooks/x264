@@ -47,7 +47,7 @@ git "#{Chef::Config[:file_cache_path]}/x264" do
   repository node[:x264][:git_repository]
   reference node[:x264][:git_revision]
   action :sync
-  notifies :delete, "file[#{creates_x264}]"
+  notifies :delete, "file[#{creates_x264}]", :immediately
 end
 
 # Write the flags used to compile the application to disk. If the flags
@@ -60,7 +60,7 @@ template "#{Chef::Config[:file_cache_path]}/x264-compiled_with_flags" do
   variables(
     :compile_flags => node[:x264][:compile_flags]
   )
-  notifies :delete, "file[#{creates_x264}]"
+  notifies :delete, "file[#{creates_x264}]", :immediately
 end
 
 bash "compile_x264" do
