@@ -1,11 +1,11 @@
-maintainer       "En Masse Entertainment"
-maintainer_email "jamie@vialstudios.com"
-license          "Apache 2.0"
-description      "Installs and configures the x264 video encoding library"
+maintainer       "David Joos"
+maintainer_email "development@davidjoos.com"
+license          "MIT"
+description      "Installs/Configures x264"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.2.0"
+version          "0.4.0"
 
-supports "ubuntu", "10.04"
+supports "ubuntu"
 
 depends "build-essential"
 depends "git"
