@@ -2,7 +2,7 @@
 # Cookbook Name:: x264
 # Library:: helpers
 #
-# Copyright 2014, David Joos
+# Copyright 2014, Escape Studios
 #
 
 module X264

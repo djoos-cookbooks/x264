@@ -2,7 +2,7 @@
 # Cookbook Name:: x264
 # Recipe:: default
 #
-# Copyright 2014, David Joos
+# Copyright 2014, Escape Studios
 #
 
 case node['x264']['install_method']
