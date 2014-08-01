@@ -7,7 +7,7 @@
 
 include_recipe "build-essential"
 include_recipe "git"
-include_recipe "yasm"
+include_recipe "yasm::source"
 
 x264_packages.each do |pkg|
     package pkg do
@@ -19,6 +19,7 @@ creates_x264 = "#{node['x264']['prefix']}/bin/x264"
 
 file "#{creates_x264}" do
     action :nothing
+    subscribes :delete, "bash[compile_yasm]", :immediately
 end
 
 git "#{Chef::Config[:file_cache_path]}/x264" do
@@ -47,5 +48,5 @@ bash "compile_x264" do
         ./configure --prefix=#{node['x264']['prefix']} #{node['x264']['compile_flags'].join(' ')}
         make clean && make && make install
     EOH
-    creates "#{creates_x264}"
+    not_if {  ::File.exists?(creates_x264) }
 end
