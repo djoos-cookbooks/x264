@@ -12,6 +12,7 @@ include_recipe 'yasm'
 x264_packages.each do |pkg|
   package pkg do
     action :purge
+    ignore_failure true
   end
 end
 
