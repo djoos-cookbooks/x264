@@ -6,8 +6,8 @@
 #
 
 case node['x264']['install_method']
-    when :source
-        include_recipe "x264::source"
-    when :package
-        include_recipe "x264::package"
+when :source
+  include_recipe 'x264::source'
+when :package
+  include_recipe 'x264::package'
 end
