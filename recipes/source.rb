@@ -22,7 +22,7 @@ file "#{creates_x264}" do
     subscribes :delete, "bash[compile_yasm]", :immediately
 end
 
-git "#{Chef::Config[:file_cache_path]}/x264" do
+git node['x264']['build_dir'] do
     repository node['x264']['git_repository']
     reference node['x264']['git_revision']
     action :sync
@@ -31,7 +31,7 @@ end
 
 # Write the flags used to compile the application to disk. If the flags
 # do not match those that are in the compiled_flags attribute - we recompile
-template "#{Chef::Config[:file_cache_path]}/x264-compiled_with_flags" do
+template "#{node['x264']['build_dir']}/x264-compiled_with_flags" do
     source "compiled_with_flags.erb"
     owner "root"
     group "root"
@@ -43,7 +43,7 @@ template "#{Chef::Config[:file_cache_path]}/x264-compiled_with_flags" do
 end
 
 bash "compile_x264" do
-    cwd "#{Chef::Config[:file_cache_path]}/x264"
+    cwd node['x264']['build_dir']
     code <<-EOH
         ./configure --prefix=#{node['x264']['prefix']} #{node['x264']['compile_flags'].join(' ')}
         make clean && make && make install
