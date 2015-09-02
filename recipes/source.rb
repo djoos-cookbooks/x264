@@ -46,7 +46,7 @@ bash 'compile_x264' do
   cwd "#{Chef::Config[:file_cache_path]}/x264"
   code <<-EOH
     ./configure --prefix=#{node['x264']['prefix']} #{node['x264']['compile_flags'].join(' ')}
-    make clean && make && make install
+    make clean && make -j#{node['cpu']['total']} && make install
   EOH
   creates creates_x264
 end
