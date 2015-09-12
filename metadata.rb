@@ -8,7 +8,6 @@ version '0.6.0'
 
 supports 'ubuntu'
 
-depends 'apt'
 depends 'git'
 depends 'build-essential'
 depends 'yasm'
