@@ -2,14 +2,14 @@
 # Cookbook Name:: x264
 # Recipe:: source
 #
-# Copyright 2014, Escape Studios
+# Copyright 2014-2015, Escape Studios
 #
 
 include_recipe 'build-essential'
 include_recipe 'git'
 include_recipe 'yasm'
 
-x264_packages.each do |pkg|
+node['x264']['packages'].each do |pkg|
   package pkg do
     action :purge
     ignore_failure true
